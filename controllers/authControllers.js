@@ -1,4 +1,4 @@
-import User from '../models/User';
+import User from '../models/User.js';
 
 export const registerUser = async (req, res) => {
     const {name, email, password, role} = req.body;
@@ -19,7 +19,7 @@ export const registerUser = async (req, res) => {
                 name: user.name,
                 email: user.email,
                 role: user.role,
-                toke: user.generateToken()
+                token: user.generateToken()
             });
         }
     } catch(error){

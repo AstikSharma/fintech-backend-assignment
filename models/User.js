@@ -6,22 +6,21 @@ const UserSchema = new mongoose.Schema({
     name: {type: String, required: true},
     email: {type: String, unique: true, required: true},
     password: {type: String, required: true},
-    roles: {type: String, enum: ['Viewer', 'Analyst', 'Admin'], default: 'Viewer'},
+    role: {type: String, enum: ['Viewer', 'Analyst', 'Admin'], default: 'Viewer'},
     status: {type: String, enum: ['active', 'inactive'], default: 'active'}
 }, {timestamps: true});
 
-UserSchema.pre('Save', async function (next){
-    if(!this.isModified('password')) return next();
+UserSchema.pre('save', async function (){
+    if(!this.isModified('password')) return;
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
-    next();
 });
 
 UserSchema.methods.matchPassword = async function(enteredPassword){
     return await bcrypt.compare(enteredPassword, this.password);
 };
 
-UserSchema.methods.generateToke = function(){
+UserSchema.methods.generateToken = function(){
     return jwt.sign(
         {id: this._id, role: this.role},
         process.env.JWT_SECRET,
@@ -29,4 +28,4 @@ UserSchema.methods.generateToke = function(){
     );
 };
 
-export default mongoose.Model('User', UserSchema);
+export default mongoose.model('User', UserSchema);

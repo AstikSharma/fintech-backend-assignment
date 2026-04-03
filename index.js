@@ -1,7 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import authRoutes from './routes/authRoutes';
+import authRoutes from './routes/authRoutes.js';
+import transactionRoutes from './routes/transactionRoutes.js';
+import summaryRoutes from './routes/summaryRoutes.js';
 
 dotenv.config();
 
@@ -25,6 +27,8 @@ const connectDB = async () =>{
 };
 
 app.use('/api/auth', authRoutes);
+app.use('/api/transaction', transactionRoutes);
+app.use('/api/summary', summaryRoutes);
 
 connectDB().then(() => {
     app.listen(PORT, () => {
