@@ -13,10 +13,20 @@ A robust, modular Node.js/Express API designed for managing financial transactio
 - **Financial Records CRUD:** Full management of Income and Expenses.
 - **Advanced Filtering:** Filter transactions by `type`, `category`, and `date range` (startDate/endDate).
 - **Dashboard Summary:** Admin and Analyst can see Aggregated totals for Income, Expenses, and Net Balance.
-- **Role-Based Access Control (RBAC):** - **Admin:** Full control (Create transactions, Read transactions, Update transactions, Delete transactions and view  Analytics).
+- **Role-Based Access Control (RBAC):**
+  - **Admin:** Full control (Create transactions, Read transactions, Update transactions, Delete transactions and view  Analytics).
   - **Analyst:** Can create transactions and view Analytics, but cannot Delete/Update transactions.
   - **Viewer:** Read-only access to transactions.
 - **Security:** Protected routes using JWT (JSON Web Tokens).
+
+---
+
+## 🛠 Tech Stack
+- Node.js
+- Express.js
+- MongoDB + Mongoose
+- JWT Authentication
+- Bcrypt
 
 ---
 
@@ -40,7 +50,32 @@ A robust, modular Node.js/Express API designed for managing financial transactio
 
 ---
 
+## 📡 API Endpoints Overview
+
+### Auth
+- POST /api/auth/register
+- POST /api/auth/login
+
+### Transactions
+- POST /api/transaction → Create transaction
+- GET /api/transaction → Get all transactions
+- PUT /api/transaction/:id → Update transaction
+- DELETE /api/transaction/:id → Delete transaction
+
+### Summary
+- GET /api/summary
+
+---
+
 ## 📋 Testing Instructions
+
+### 📘 Important Note on Documentation
+Each request in the Postman collection includes detailed information in the **Docs tab**, such as:
+- Purpose of the API
+- Required fields
+- Example request bodies
+
+Please refer to the Docs tab for complete request-level documentation.
 
 ### A) Environment Setup
 - **Download the JSON file from (Postman Collection) drive link:** Open Postman and click on `import` on the top left corner (beside new) and import the downloaded Postman Collection JSON file into Postman.
