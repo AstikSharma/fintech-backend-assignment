@@ -4,6 +4,8 @@ const TransactionSchema = new Schema({
     amount: {type: Number, required: true},
     type: {type: String, enum:['income', 'expense'], required: true},
     category: {type: String, required: true},
+    status: {type: String, enum:['pending', 'completed'], required: true},
+    isRecurring: {type: Boolean, required: true},
     date: {type: Date, default: Date.now},
     description: String,
     createdBy: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}

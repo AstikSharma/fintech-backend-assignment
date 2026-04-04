@@ -1,7 +1,7 @@
 import Transaction from '../models/Transaction.js';
 
 export const createTransaction = async (req, res) => {
-    const {amount, type, category, description} = req.body;
+    const {amount, type, category, status, isRecurring, description} = req.body;
     if (amount <= 0){
         return res.status(400).json({ message: "Amount must be positive" });
     }
@@ -10,6 +10,8 @@ export const createTransaction = async (req, res) => {
             amount,
             type,
             category,
+            status,
+            isRecurring,
             description,
             createdBy: req.user._id
         });
@@ -21,11 +23,20 @@ export const createTransaction = async (req, res) => {
 
 export const getTransactions = async (req, res) => {
     try{
-        const {type, category} = req.query;
+        const {type, category, startDate, endDate} = req.query;
         let query = {};
         if(type) query.type = type;
         if(category) query.category = category;
-        const transactions = await Transaction.find(query).populate('createdBy', 'name role');
+        if(startDate || endDate){
+            query.date = {};
+            if(startDate){
+                query.date.$gte = new Date(startDate);
+            }
+            if (endDate) {
+                query.date.$lte = new Date(endDate);
+            }
+        }
+        const transactions = await Transaction.find(query).sort({date: -1}).populate('createdBy', 'name role');
         res.status(200).json(transactions);
     } catch(error) {
         res.status(500).json({message: error.message});
@@ -46,7 +57,7 @@ export const updateTransaction = async (req, res) => {
             req.body,
             {new: true}
         );
-        res.json( {message: "Updated successfully"},updateTransaction);
+        res.json( {message: "Updated successfully"});
     } catch (error) {
         res.status(400).json({message: error.message});
     }
