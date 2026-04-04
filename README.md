@@ -4,7 +4,7 @@ A robust, modular Node.js/Express API designed for managing financial transactio
 
 ## Live Links
 - **Live API URL:** [https://fintech-backend-assignment.onrender.com](https://fintech-backend-assignment.onrender.com)
-- **Postman Collection:** (Exported as a JSON file, link to download:`https://drive.google.com/file/d/1MhbDJWg4dolBp20aQkPnk0Hek1Yg1xp0/view?usp=sharing`)
+- **Postman Collection:** (Exported as a JSON file, link to download: [https://drive.google.com/file/d/1MhbDJWg4dolBp20aQkPnk0Hek1Yg1xp0/view?usp=sharing](https://drive.google.com/file/d/1MhbDJWg4dolBp20aQkPnk0Hek1Yg1xp0/view?usp=sharing))
 
 ---
 
